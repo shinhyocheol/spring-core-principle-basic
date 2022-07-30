@@ -1,13 +1,13 @@
-package hello.core;
+package com.order.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HelloApplication {
+public class OrderExampleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HelloApplication.class, args);
+        SpringApplication.run(OrderExampleApplication.class, args);
     }
 
 }

@@ -1,10 +1,10 @@
-package hello.core;
+package com.order.example;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HelloApplicationTests {
+class OrderExampleApplicationTests {
 
     @Test
     void contextLoads() {
