@@ -1,7 +1,7 @@
 package com.order.example;
 
 import com.order.example.discount.DiscountPolicy;
-import com.order.example.discount.FixDiscountPolicy;
+import com.order.example.discount.RateDiscountPolicy;
 import com.order.example.member.MemberService;
 import com.order.example.member.MemberServiceImpl;
 import com.order.example.member.MemoryMemberRepository;
@@ -22,6 +22,6 @@ public class AppConfig {
     }
 
     public DiscountPolicy discountPolicy() {
-        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
     }
 }

@@ -3,7 +3,6 @@ package com.order.example.order;
 import com.order.example.discount.DiscountPolicy;
 import com.order.example.member.Member;
 import com.order.example.member.MemberRepository;
-import com.order.example.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService {
 
