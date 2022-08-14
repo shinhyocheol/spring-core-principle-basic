@@ -29,18 +29,42 @@ public class AppConfig {
      *  ex) memberService() -> memberService, orderService() -> orderService
      * 물론 name 속성을 통해 이름을 별도로 지정해줄 수 있다.
      */
+
+    // @Bean memberService --> new MemoryMemberRepository()
+    // @Bean orderService --> new MemoryMemberRepository()
+    /**
+     * memberService 를 호출하면, memberRepository() 를 호출한다.
+     * orderService 를 호출하면, memberRepository() 를 호출한다.
+     *
+     * 결과적으로 각각 다른 2개의 메서드에서 MemoryMemberRepository 가 생성되면서 싱글톤이 깨지는 것처럼 보일 수 있다.
+     * 스프링 컨테이너는 이러한 문제를 해결하고, 결국 하나의 공유객체로 생성한다.
+     */
+
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+    // call AppConfig.memberRepository
+    // call AppConfig.memberRepository
+
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+
     @Bean
     public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean
     public MemoryMemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
