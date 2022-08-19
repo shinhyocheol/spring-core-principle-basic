@@ -10,7 +10,7 @@ import org.springframework.lang.Nullable;
 import java.util.Optional;
 
 public class AutowiredTest {
-
+    // 존재하지 않는 빈을 등록하는 경우 테스트
     @Test
     void AutowiredTest() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(TestBean.class);
