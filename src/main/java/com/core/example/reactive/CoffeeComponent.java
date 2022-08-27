@@ -24,7 +24,7 @@ public class CoffeeComponent implements CoffeeUseCase{
     }
 
     @Override
-    public Future<Integer> getPriceAsync(String name) {
+    public CompletableFuture<Integer> getPriceAsync(String name) {
         log.info("비동기 호출 방식으로 커피 가격 조회");
         CompletableFuture<Integer> future = new CompletableFuture<>();
 
