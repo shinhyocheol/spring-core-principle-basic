@@ -26,6 +26,7 @@ public class CoffeeComponent implements CoffeeUseCase{
     @Override
     public CompletableFuture<Integer> getPriceAsync(String name) {
         log.info("비동기 호출 방식으로 커피 가격 조회");
+
         CompletableFuture<Integer> future = new CompletableFuture<>();
 
         new Thread(() -> {
@@ -36,6 +37,27 @@ public class CoffeeComponent implements CoffeeUseCase{
 
         return future;
     }
+
+    @Override
+    public CompletableFuture<Integer> getPriceAsyncNonBlockingAndNoReturn(String name) {
+        log.info("비동기 호출 방식으로 커피 가격 조회");
+
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("supplyAsync");
+            return coffeeRepository.getPriceByName(name);
+        }, executor);
+    }
+
+    @Override
+    public CompletableFuture<Integer> getPriceAsyncNonBlockingAndReturn(String name) {
+        log.info("비동기 호출 방식으로 커피 가격 조회");
+
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("supplyAsync");
+            return coffeeRepository.getPriceByName(name);
+        }, executor);
+    }
+
 
     @Override
     public Future<Integer> getDiscountPriceAsync(Integer price) {

@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,6 +45,38 @@ public class CoffeeTest {
         assertThat(price).isEqualTo(resultPrice);
     }
 
+    @DisplayName("커피 가격을 비동기 + 논블로킹 방식으로 조회한다.")
+    @Test
+    void getAsyncCoffeePriceNonBlocking() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(TestCoffeeConfig.class);
+        CoffeeComponent coffeeComponent = ac.getBean("coffeeComponent", CoffeeComponent.class);
+
+        int price = 900;
+        CompletableFuture<Void> future = coffeeComponent.getPriceAsyncNonBlockingAndNoReturn("americano")
+                .thenAccept(p -> {
+                    assertThat(p).isEqualTo(price);
+                });
+        log.info("아메리카노 가격 요청했는데, 아직 수행이 안되었으므로 기다리는 중 이지만, 다른 작업 수행 가능");
+
+        assertThat(future.join()).isNull();
+    }
+
+    @DisplayName("커피 가격을 비동기 + 논블로킹 방식으로 조회한다.")
+    @Test
+    void getAsyncCoffeePriceNonBlockingReturn() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(TestCoffeeConfig.class);
+        CoffeeComponent coffeeComponent = ac.getBean("coffeeComponent", CoffeeComponent.class);
+
+        int price = 900;
+        CompletableFuture<Integer> future = coffeeComponent.getPriceAsyncNonBlockingAndReturn("americano")
+                .thenApply(p -> {
+                    return p;
+                });
+        log.info("아메리카노 가격 요청했는데, 아직 수행이 안되었으므로 기다리는 중 이지만, 다른 작업 수행 가능");
+
+        assertThat(future.join()).isEqualTo(price);
+    }
+
     @Configuration
     static class TestCoffeeConfig {
         @Bean
@@ -52,6 +86,10 @@ public class CoffeeTest {
         @Bean
         public CoffeeComponent coffeeComponent() {
             return new CoffeeComponent(coffeeRepository());
+        }
+        @Bean
+        public Executor executor() {
+            return Executors.newFixedThreadPool(10);
         }
     }
 

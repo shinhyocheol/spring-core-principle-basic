@@ -20,7 +20,7 @@ public class CoffeeRepository {
 
     public int getPriceByName(String name) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
