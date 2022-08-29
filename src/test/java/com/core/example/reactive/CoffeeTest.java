@@ -61,7 +61,7 @@ public class CoffeeTest {
         assertThat(future.join()).isNull();
     }
 
-    @DisplayName("커피 가격을 비동기 + 논블로킹 방식으로 조회한다.")
+    @DisplayName("커피 가격을 비동기 + 논블로킹 방식(콜백 활용)으로 조회한다.")
     @Test
     void getAsyncCoffeePriceNonBlockingReturn() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(TestCoffeeConfig.class);
@@ -69,12 +69,14 @@ public class CoffeeTest {
 
         int price = 900;
         CompletableFuture<Integer> future = coffeeComponent.getPriceAsyncNonBlockingAndReturn("americano")
-                .thenApply(p -> {
-                    return p;
+                .thenApply(result -> {
+                    log.info("콜백 실행 결과 = {}", result);
+                    return result;
                 });
         log.info("아메리카노 가격 요청했는데, 아직 수행이 안되었으므로 기다리는 중 이지만, 다른 작업 수행 가능");
+        log.info("future.join() = {}", future.join());
 
-        assertThat(future.join()).isEqualTo(price);
+        assertThat(future.join()).isEqualTo(price); // 테스트를 위한 블로킹 코드 삽입
     }
 
     @Configuration
