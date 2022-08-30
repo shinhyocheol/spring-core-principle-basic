@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -12,7 +13,7 @@ import java.util.concurrent.Future;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CoffeeComponent implements CoffeeUseCase{
+public class CoffeeComponent implements CoffeeUseCase {
     private final CoffeeRepository coffeeRepository;
     Executor executor = Executors.newFixedThreadPool(10);
 
@@ -62,5 +63,13 @@ public class CoffeeComponent implements CoffeeUseCase{
     @Override
     public Future<Integer> getDiscountPriceAsync(Integer price) {
         return null;
+    }
+
+    @Override
+    public CompletableFuture<List<Coffee>> getPriceListAsyncNonBlockingAndReturn() {
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("supplyAsync");
+            return coffeeRepository.getPriceList();
+        }, executor);
     }
 }

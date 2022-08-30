@@ -3,8 +3,7 @@ package com.core.example.reactive;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class CoffeeRepository {
@@ -28,4 +27,13 @@ public class CoffeeRepository {
         return coffeeMap.get(name).getPrice();
     }
 
+    public List<Coffee> getPriceList() {
+        List<Coffee> priceList = new ArrayList<>();
+
+        for (String key : coffeeMap.keySet()) {
+            priceList.add(coffeeMap.get(key));
+        }
+
+        return priceList;
+    }
 }

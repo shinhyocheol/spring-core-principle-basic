@@ -1,5 +1,6 @@
 package com.core.example.reactive;
 
+import java.util.List;
 import java.util.concurrent.Future;
 
 public interface CoffeeUseCase {
@@ -8,4 +9,5 @@ public interface CoffeeUseCase {
     Future<Integer> getPriceAsyncNonBlockingAndNoReturn(String name);
     Future<Integer> getPriceAsyncNonBlockingAndReturn(String name);
     Future<Integer> getDiscountPriceAsync(Integer price);
+    Future<List<Coffee>> getPriceListAsyncNonBlockingAndReturn();
 }
