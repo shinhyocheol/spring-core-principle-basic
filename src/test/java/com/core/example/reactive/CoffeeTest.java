@@ -89,10 +89,13 @@ public class CoffeeTest {
 
         List<Integer> priceList = Arrays.asList(new Integer[] {1100, 1300, 900});
 
-        CompletableFuture<List<Coffee>> future = coffeeComponent.getPriceListAsyncNonBlockingAndReturn()
+        List<Coffee> future = coffeeComponent.getPriceListAsyncNonBlockingAndReturn()
                 .thenApply(p -> {
                     return p;
-                });
+                }).join();
+
+        System.out.println("future = " + future);
+
     }
 
     @Configuration
