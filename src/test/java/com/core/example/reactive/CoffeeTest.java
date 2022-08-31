@@ -94,7 +94,7 @@ public class CoffeeTest {
                     return p;
                 }).join();
 
-        System.out.println("future = " + future);
+        System.out.println("future = " + future.toString());
 
     }
 
