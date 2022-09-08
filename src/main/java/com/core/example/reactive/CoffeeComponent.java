@@ -56,7 +56,7 @@ public class CoffeeComponent implements CoffeeUseCase {
         return CompletableFuture.supplyAsync(() -> {
             log.info("supplyAsync");
             return coffeeRepository.getPriceByName(name);
-        }, executor);
+        }, executor); 
     }
 
 
