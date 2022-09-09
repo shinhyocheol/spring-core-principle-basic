@@ -3,6 +3,7 @@ package com.core.example.order;
 import com.core.example.discount.DiscountPolicy;
 import com.core.example.member.Member;
 import com.core.example.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Component;
  *     - 항상 생성자 주입을 선택해라! 그리고 가끔 옵션이 필요하면 수정자 주입을 선택해라. 필드 주입은 가급적 사용하지 않는 것이 좋다.
  */
 @Component
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     // [불변, 필수]
@@ -41,14 +43,14 @@ public class OrderServiceImpl implements OrderService {
      */
     // 생성자가 하나인 경우 @Autowired 를 생략할 수 있다.
     // @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository,
-                            DiscountPolicy discountPolicy) {
-        System.out.println("memberRepository = " + memberRepository);
-        System.out.println("discountPolicy = " + discountPolicy);
+    // public OrderServiceImpl(MemberRepository memberRepository,
+    //                        DiscountPolicy discountPolicy) {
+    //    System.out.println("memberRepository = " + memberRepository);
+    //    System.out.println("discountPolicy = " + discountPolicy);
 
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+    //    this.memberRepository = memberRepository;
+    //    this.discountPolicy = discountPolicy;
+    // }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
