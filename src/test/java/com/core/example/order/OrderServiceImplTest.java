@@ -14,7 +14,7 @@ class OrderServiceImplTest {
     @Test
     void createOrder() {
         MemberRepository memberRepository = new MemoryMemberRepository();
-        memberRepository.save(new Member(1L, "mmember", Grade.VIP));
+        memberRepository.save(new Member(1L, "member", Grade.VIP));
 
         OrderServiceImpl orderService = new OrderServiceImpl(memberRepository, new FixDiscountPolicy());
         Order order = orderService.createOrder(1L, "itemA", 10000);
