@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  *     - 항상 생성자 주입을 선택해라! 그리고 가끔 옵션이 필요하면 수정자 주입을 선택해라. 필드 주입은 가급적 사용하지 않는 것이 좋다.
  */
 @Component
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     // [불변, 필수]
@@ -43,11 +43,11 @@ public class OrderServiceImpl implements OrderService {
      * @Autowired 필드 명 매칭
      *  타입 매칭을 시도하고, 이때 여러 빈이 있으면 필드 이름, 파라미터 이름으로 빈 이름을 추가 매칭한다.
      */
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+    // @Autowired
+    // public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    //    this.memberRepository = memberRepository;
+    //    this.discountPolicy = discountPolicy;
+    // }
 
     /**
      * @Autowired
