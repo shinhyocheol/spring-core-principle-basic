@@ -43,12 +43,6 @@ public class OrderServiceImpl implements OrderService {
      * @Autowired 필드 명 매칭
      *  타입 매칭을 시도하고, 이때 여러 빈이 있으면 필드 이름, 파라미터 이름으로 빈 이름을 추가 매칭한다.
      */
-    // @Autowired
-    // public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-    //    this.memberRepository = memberRepository;
-    //    this.discountPolicy = discountPolicy;
-    // }
-
     /**
      * @Autowired
      * 스프링은 런타임시 두가지를 나눠서 실행한다.
@@ -57,16 +51,12 @@ public class OrderServiceImpl implements OrderService {
      *
      * 또한 @Autowired 는 대상이 스프링 빈이어야 한다. 빈이 아닌 클래스에 해당 어노테이션을 적용해도 아무런 동작을 하지 않는다.
      */
-    // 생성자가 하나인 경우 @Autowired 를 생략할 수 있다.
     // @Autowired
-    // public OrderServiceImpl(MemberRepository memberRepository,
-    //                        DiscountPolicy discountPolicy) {
-    //    System.out.println("memberRepository = " + memberRepository);
-    //    System.out.println("discountPolicy = " + discountPolicy);
-
+    // public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
     //    this.memberRepository = memberRepository;
     //    this.discountPolicy = discountPolicy;
     // }
+
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
