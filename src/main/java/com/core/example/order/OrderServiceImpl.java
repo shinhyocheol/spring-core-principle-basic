@@ -1,5 +1,6 @@
 package com.core.example.order;
 
+import com.core.example.annotation.MainDiscountPolicy;
 import com.core.example.discount.DiscountPolicy;
 import com.core.example.member.Member;
 import com.core.example.member.MemberRepository;
@@ -25,7 +26,6 @@ import org.springframework.stereotype.Component;
  *     - 항상 생성자 주입을 선택해라! 그리고 가끔 옵션이 필요하면 수정자 주입을 선택해라. 필드 주입은 가급적 사용하지 않는 것이 좋다.
  */
 @Component
-@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     /**
@@ -35,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
      **/
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
+
 
     /**
      * [조회 대상 빈이 2개 이상일 때 해결 방법]
@@ -53,11 +54,11 @@ public class OrderServiceImpl implements OrderService {
      *
      * 또한 @Autowired 는 대상이 스프링 빈이어야 한다. 빈이 아닌 클래스에 해당 어노테이션을 적용해도 아무런 동작을 하지 않는다.
      */
-    // @Autowired
-    // public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-    //    this.memberRepository = memberRepository;
-    //    this.discountPolicy = discountPolicy;
-    // }
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy)  {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {

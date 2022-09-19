@@ -1,13 +1,14 @@
 package com.core.example.discount;
 
+import com.core.example.annotation.MainDiscountPolicy;
 import com.core.example.member.Member;
 import com.core.example.member.Grade;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
 @Primary
+@MainDiscountPolicy
 /**
  * @Qualifier("mainDiscountPolicy")
  * @Qualifier : 의존성 주입 시에 이름을 직접 지정하고, 의존관계를 주입받는 곳에서 동일하게 해당 어노테이션을 붙여준다.
