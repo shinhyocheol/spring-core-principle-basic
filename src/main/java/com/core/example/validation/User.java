@@ -10,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 @Getter
 @AllArgsConstructor
 @ToString
-@Validated
 public class User {
     @NotBlank(message = "이름을 입력해주세요.")
     private String name;
