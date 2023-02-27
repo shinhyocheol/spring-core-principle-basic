@@ -12,6 +12,10 @@ import javax.inject.Provider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 참고 : 스프링을 사용하다 보면 자바 표준과 스프링이 제공하는 기능이 겹칠때가 많이 있다.
+ * 스프링이 더 다양하고 편리한 기능을 제공해주기 때문에, 특별히 다른 컨테이너를 사용할 일이 없다면, 스프링이 제공하는 기능을 사용하면 된다.
+ */
 public class SingletonWithPrototypeTest1 {
 
     @Test
