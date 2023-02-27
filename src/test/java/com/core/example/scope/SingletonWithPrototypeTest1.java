@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,11 +43,22 @@ public class SingletonWithPrototypeTest1 {
     @Scope("singleton")
     static class ClientBean {
 
+        // ObjectFactory: 기능이 단순, 별도의 라이브러리 필요 없음, 스프링에 의존
+        // ObjectProvider: ObjectFactory 상속, 옵션, 스트림 처리등 편의 기능이 많고, 별도의 라이브러리 필요 없음, 스프링에 의존
+
+        // ObjectProvider 의 getObject 를 호출하면 내부에서는 스프링 컨테이너를 통해 해당 빈을 찾아서 반환한다.("DL")
+        // @Autowired
+        // private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+
+        // 실행해보면 provider.get() 을 통해서 항상 새로운 프로토타입 빈이 생성되는 것을 확인할 수 있다.
+        // provider 의 get() 을 호출하면 내부에서는 스프링 컨테이너틀 통해 해당 빈을 찾아서 반환한다("DL")
+        // 자바 표준이고, 기능이 단순하므로 단위테스트를 만들거나 mock 코드를 만들기는 훨씬 쉬워진다.
+        // 'Provider' 는 지금 딱 필요한 DL 정도의 기능만 제공한다.
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        private Provider<PrototypeBean> prototypeBeanProvider;
 
         public int logic() {
-            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
 
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
